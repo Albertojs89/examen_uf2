@@ -25,12 +25,16 @@ function Cuadricula() {
       let nuevaPosicion = { ...posicionActual };
 
       if (evento.key === "ArrowUp" && nuevaPosicion.y > 0) {
+        console.log("Arriba");
         nuevaPosicion.y -= 1;
       } else if (evento.key === "ArrowDown" && nuevaPosicion.y < filas - 1) {
+        console.log("Abajo");
         nuevaPosicion.y += 1;
       } else if (evento.key === "ArrowLeft" && nuevaPosicion.x > 0) {
+        console.log("Izquierda");
         nuevaPosicion.x -= 1;
       } else if (evento.key === "ArrowRight" && nuevaPosicion.x < columnas - 1) {
+        console.log("Derecha");
         nuevaPosicion.x += 1;
       }
 
