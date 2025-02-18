@@ -19,11 +19,40 @@ function Cuadricula({ aumentarPuntos }) {
     return Array.from({ length: 5 }, () => new Fantasma(filas, columnas));
   });
 
-  // EVITAR QUE SALGA DE LA PANTALLA
+  // useEffect para detectar si el Comecocos ha comido un fantasma
+  useEffect(() => {
+    let nuevosFantasmas = [...fantasmas]; // Copia del array de fantasmas
 
+    // Recorremos fantasmas
+    for (let i = 0; i < nuevosFantasmas.length; i++) {
+      let fantasma = nuevosFantasmas[i];
+
+      // Si el Comecocos está en la misma posición que un fantasma lo mata!-----
+      if (
+        fantasma.x === posicionComecocos.x &&
+        fantasma.y === posicionComecocos.y
+      ) {
+        fantasma.morir(); // pasa a muerto---------------<
+        aumentarPuntos(); // sumar los puntos
+      }
+    }
+
+    // utilizar filter para filtrar y comprobar vivos
+    setFantasmas(
+      nuevosFantasmas.filter((fantasma) => fantasma.estado === "vivo")
+    );
+  }, [posicionComecocos]);
+
+  //comprobar si hay fantasmas vivos para GANAR!----
+  const hayFantasmasVivos = fantasmas.length > 0;
+  if (hayFantasmasVivos==0){
+    alert("HAS GANADO");
+    return;
+  }
+
+  // EVITAR QUE SALGA DE LA PANTALLA
   /*
   verificar limites:
-
  arriba (ArrowUp) →  y > 0
  abajo (ArrowDown) →  y < filas - 1
  izquierda (ArrowLeft) →  x > 0
@@ -51,18 +80,6 @@ function Cuadricula({ aumentarPuntos }) {
         nuevaPosicion.x += 1;
       }
 
-      // CHOQUE CON FANTASMA----------------------------------------------------------------
-      const nuevoArrayFantasmas = fantasmas.filter(
-        (fantasma) =>
-          !(fantasma.x === nuevaPosicion.x && fantasma.y === nuevaPosicion.y)
-      );
-
-      // Si Comecocos ha comido un fantasma, aumentamos los puntos
-      if (nuevoArrayFantasmas.length < fantasmas.length) {
-        aumentarPuntos();
-      }
-
-      setFantasmas(nuevoArrayFantasmas); // Eliminamos el fantasma de la lista
       return nuevaPosicion;
     });
   };
@@ -89,13 +106,17 @@ function Cuadricula({ aumentarPuntos }) {
             claseCelda += " comecocos";
           }
 
-          // Verificamos si la celda actual es de un fantasma
-          if (
-            fantasmas.some(
-              (fantasma) => fantasma.x === colIndex && fantasma.y === filaIndex
-            )
-          ) {
-            claseCelda += " fantasma";
+          // Recorremos FANTASMAS-------------
+          for (let i = 0; i < fantasmas.length; i++) {
+            let fantasma = fantasmas[i];
+            if (
+              fantasma.x === colIndex &&
+              fantasma.y === filaIndex &&
+              fantasma.estado === "vivo"
+            ) {
+              claseCelda += " fantasma";
+              break; 
+            }
           }
 
           return (
@@ -112,8 +133,8 @@ PASOS------
 generamos una cuadricula de celdas
 asignamos css para indicar posicion del COMECOSO y los fantasmas
 usestate--> manejamos las posiciones y visualiza las celdas 
-detectamos cuando el COMECOSO come un fantasma y lo eliminamos
+detectamos cuando el COMECOSO come un fantasma y lo eliminamos sin usar .some()
+cambiamos el estado del fantasma a "muerto" en lugar de eliminarlo directamente
 sumamos puntos cuando el COMECOSO come un fantasma
-
 */
 export default Cuadricula;

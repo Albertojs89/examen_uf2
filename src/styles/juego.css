@@ -19,7 +19,10 @@ body{
   
 }
 .comecocos {
-  background-color: yellow;
+  background-image: url("https://e7.pngegg.com/pngimages/626/881/png-clipart-fc-barcelona-fc-barcelona.png");
+  background-repeat: no-repeat;
+  background-size: 80px;
+  background-position: center;
   border-radius: 50%; 
 }
 /* Contador de PUNTOS */
@@ -39,6 +42,9 @@ body{
   border-radius: 20px;
 }
 .fantasma {
-  background-color: rgb(221, 44, 44);
+  background-image: url("https://e1.pngegg.com/pngimages/565/268/png-clipart-real-madrid-logo-real-madrid-logo.png");
+  background-repeat: no-repeat;
+  background-size: 80px;
+  background-position: center;
   border-radius: 50%;
 }
