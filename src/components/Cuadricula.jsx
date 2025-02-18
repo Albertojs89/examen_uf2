@@ -101,6 +101,7 @@ function Cuadricula({ aumentarPuntos }) {
   return (
     // PINTAR TABLA DEL JUEGO----------------------------------
     <div className="cuadricula">
+      {/* __ como variable indica que esta no será utilizada */}
       {[...Array(filas)].map((_, filaIndex) =>
         [...Array(columnas)].map((_, colIndex) => {
           let claseCelda = "celda";
