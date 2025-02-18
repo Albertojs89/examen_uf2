@@ -14,9 +14,14 @@ const posicionInicial = {
 function Cuadricula({ aumentarPuntos }) {
   const [posicionComecocos, setPosicionComecocos] = useState(posicionInicial);
 
-  // Generamos 5 fantasmas con posiciones aleatorias
+  // Generamos 5 fantasmas con posiciones aleatorias--------------------------
   const [fantasmas, setFantasmas] = useState(() => {
-    return Array.from({ length: 5 }, () => new Fantasma(filas, columnas));
+    let listaFantasmas = [];
+    for (let i = 0; i < 5; i++) {
+      let nuevoFantasma = new Fantasma(filas, columnas);
+      listaFantasmas.push(nuevoFantasma);
+    }
+    return listaFantasmas;
   });
 
   // useEffect para detectar si el Comecocos ha comido un fantasma
@@ -27,7 +32,7 @@ function Cuadricula({ aumentarPuntos }) {
     for (let i = 0; i < nuevosFantasmas.length; i++) {
       let fantasma = nuevosFantasmas[i];
 
-      // Si el Comecocos está en la misma posición que un fantasma lo mata!-----
+      // CONDICION DE MATAR FANTASMA Y AUMENTAR PUNTOS-----
       if (
         fantasma.x === posicionComecocos.x &&
         fantasma.y === posicionComecocos.y
@@ -45,14 +50,13 @@ function Cuadricula({ aumentarPuntos }) {
 
   //comprobar si hay fantasmas vivos para GANAR!------------------
   const hayFantasmasVivos = fantasmas.length > 0;
-  if (hayFantasmasVivos==0){
+  if (hayFantasmasVivos == 0) {
     alert("HAS GANADO");
     return;
   }
-//----------------------------------------------------------------
+  //----------------------------------------------------------------
 
-
-  // EVITAR QUE SALGA DE LA PANTALLA
+  // EVITAR QUE SALGA DE LA PANTALLA Y MOVIMIENTO---------
   /*
   verificar limites:
  arriba (ArrowUp) →  y > 0
@@ -95,6 +99,7 @@ function Cuadricula({ aumentarPuntos }) {
   }, []);
 
   return (
+    // PINTAR TABLA DEL JUEGO----------------------------------
     <div className="cuadricula">
       {[...Array(filas)].map((_, filaIndex) =>
         [...Array(columnas)].map((_, colIndex) => {
@@ -117,7 +122,7 @@ function Cuadricula({ aumentarPuntos }) {
               fantasma.estado === "vivo"
             ) {
               claseCelda += " fantasma";
-              break; 
+              break;
             }
           }
 

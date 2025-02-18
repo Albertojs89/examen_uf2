@@ -9,7 +9,11 @@ function Juego() {
   const aumentarPuntos = () => {
     setPuntos((prevPuntos) => prevPuntos + 1);
   };
+/*
+aumentar puntos con AYUDA de IA al final utiliza casi el mismo contador por defecto
+de la pagina de React Vite y lo utiliza como prop en la funcion aumentar puntos.
 
+*/
   return (
     <div className="juego-container">
       <div>
