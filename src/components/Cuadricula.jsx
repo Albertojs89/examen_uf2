@@ -48,12 +48,13 @@ function Cuadricula({ aumentarPuntos }) {
     );
   }, [posicionComecocos]);
 
-  //comprobar si hay fantasmas vivos para GANAR!------------------
+  // Comprobar si hay fantasmas vivos para GANAR!
   const hayFantasmasVivos = fantasmas.length > 0;
-  if (hayFantasmasVivos == 0) {
-    alert("HAS GANADO");
+  if (!hayFantasmasVivos) {
+    document.body.innerHTML += "<p>HAS GANADO</p>";
     return;
   }
+
   //----------------------------------------------------------------
 
   // EVITAR QUE SALGA DE LA PANTALLA Y MOVIMIENTO---------
