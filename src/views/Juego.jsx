@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Cuadricula from "../components/Cuadricula";
-import "../styles/juego.css"; // Importamos los estilos
+import "../styles/juego.css"; 
 
 function Juego() {
   const [puntos, setPuntos] = useState(0); // Estado para el contador de puntos
